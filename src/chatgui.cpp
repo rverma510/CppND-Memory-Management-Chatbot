@@ -28,6 +28,9 @@ bool ChatBotApp::OnInit()
 // wxWidgets FRAME
 ChatBotFrame::ChatBotFrame(const wxString &title) : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(width, height))
 {
+    /* Temporary */
+    std::cout << "ChatBotFrame Constructor Called!\n";
+
     // create panel with background image
     ChatBotFrameImagePanel *ctrlPanel = new ChatBotFrameImagePanel(this);
 
@@ -65,12 +68,21 @@ void ChatBotFrame::OnEnter(wxCommandEvent &WXUNUSED(event))
      _panelDialog->GetChatLogicHandle()->SendMessageToChatbot(std::string(userText.mb_str()));
 }
 
+ChatBotFrame::~ChatBotFrame() 
+{
+    /* Temporary */
+    std::cout << "ChatBotFrame Destructor Called!\n";
+
+}
+
 BEGIN_EVENT_TABLE(ChatBotFrameImagePanel, wxPanel)
 EVT_PAINT(ChatBotFrameImagePanel::paintEvent) // catch paint events
 END_EVENT_TABLE()
 
 ChatBotFrameImagePanel::ChatBotFrameImagePanel(wxFrame *parent) : wxPanel(parent)
 {
+    /* Temporary */
+    std::cout << "ChatBotFrameImagePanel Constructor Called!\n";
 }
 
 void ChatBotFrameImagePanel::paintEvent(wxPaintEvent &evt)
@@ -99,6 +111,11 @@ void ChatBotFrameImagePanel::render(wxDC &dc)
     
     dc.DrawBitmap(_image, 0, 0, false);
 }
+ChatBotFrameImagePanel::~ChatBotFrameImagePanel()
+{
+    /* Temporary */
+    std::cout << "ChatBotFrameImagePanel Destructor Called!\n";
+}
 
 BEGIN_EVENT_TABLE(ChatBotPanelDialog, wxPanel)
 EVT_PAINT(ChatBotPanelDialog::paintEvent) // catch paint events
@@ -107,6 +124,9 @@ END_EVENT_TABLE()
 ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     : wxScrolledWindow(parent, id)
 {
+    /* Temporary */
+    std::cout << "ChatBotPanelDialog Constructor Called!\n";
+
     // sizer will take care of determining the needed scroll size
     _dialogSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(_dialogSizer);
@@ -114,11 +134,8 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     // allow for PNG images to be handled
     wxInitAllImageHandlers();
 
-    //// STUDENT CODE
-    ////
-
     // create chat logic instance
-    _chatLogic = new ChatLogic(); 
+    _chatLogic = std::make_unique<ChatLogic>();
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
@@ -126,19 +143,13 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     // load answer graph from file
     _chatLogic->LoadAnswerGraphFromFile(dataPath + "src/answergraph.txt");
 
-    ////
-    //// EOF STUDENT CODE
 }
 
 ChatBotPanelDialog::~ChatBotPanelDialog()
 {
-    //// STUDENT CODE
-    ////
+    /* Temporary */
+    std::cout << "ChatBotPanelDialog Destructor Called!\n";
 
-    delete _chatLogic;
-
-    ////
-    //// EOF STUDENT CODE
 }
 
 void ChatBotPanelDialog::AddDialogItem(wxString text, bool isFromUser)
@@ -194,6 +205,10 @@ void ChatBotPanelDialog::render(wxDC &dc)
 ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel *parent, wxString text, bool isFromUser)
     : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(-1, -1), wxBORDER_NONE)
 {
+
+    /* Temporary */
+    std::cout << "ChatBotPanelDialogItem Constructor Called!\n";
+
     // retrieve image from chatbot
     wxBitmap *bitmap = isFromUser == true ? nullptr : ((ChatBotPanelDialog*)parent)->GetChatLogicHandle()->GetImageFromChatbot(); 
 
@@ -213,4 +228,10 @@ ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel *parent, wxString text, b
 
     // set background color
     this->SetBackgroundColour((isFromUser == true ? wxT("YELLOW") : wxT("BLUE")));
+}
+
+ChatBotPanelDialogItem::~ChatBotPanelDialogItem() 
+{
+    /* Temporary */
+    std::cout << "ChatBotPanelDialogItem Destructor Called!\n"; 
 }
