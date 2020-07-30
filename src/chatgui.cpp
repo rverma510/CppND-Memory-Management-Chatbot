@@ -29,7 +29,7 @@ bool ChatBotApp::OnInit()
 ChatBotFrame::ChatBotFrame(const wxString &title) : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(width, height))
 {
     /* Temporary */
-    std::cout << "ChatBotFrame Constructor Called!\n";
+    // std::cout << "ChatBotFrame Constructor Called!\n";
 
     // create panel with background image
     ChatBotFrameImagePanel *ctrlPanel = new ChatBotFrameImagePanel(this);
@@ -71,7 +71,7 @@ void ChatBotFrame::OnEnter(wxCommandEvent &WXUNUSED(event))
 ChatBotFrame::~ChatBotFrame() 
 {
     /* Temporary */
-    std::cout << "ChatBotFrame Destructor Called!\n";
+    // std::cout << "ChatBotFrame Destructor Called!\n";
 
 }
 
@@ -82,7 +82,7 @@ END_EVENT_TABLE()
 ChatBotFrameImagePanel::ChatBotFrameImagePanel(wxFrame *parent) : wxPanel(parent)
 {
     /* Temporary */
-    std::cout << "ChatBotFrameImagePanel Constructor Called!\n";
+    // std::cout << "ChatBotFrameImagePanel Constructor Called!\n";
 }
 
 void ChatBotFrameImagePanel::paintEvent(wxPaintEvent &evt)
@@ -125,7 +125,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     : wxScrolledWindow(parent, id)
 {
     /* Temporary */
-    std::cout << "ChatBotPanelDialog Constructor Called!\n";
+    // std::cout << "ChatBotPanelDialog Constructor Called!\n";
 
     // sizer will take care of determining the needed scroll size
     _dialogSizer = new wxBoxSizer(wxVERTICAL);
@@ -148,7 +148,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
 ChatBotPanelDialog::~ChatBotPanelDialog()
 {
     /* Temporary */
-    std::cout << "ChatBotPanelDialog Destructor Called!\n";
+    // std::cout << "ChatBotPanelDialog Destructor Called!\n";
 
 }
 
@@ -207,7 +207,7 @@ ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel *parent, wxString text, b
 {
 
     /* Temporary */
-    std::cout << "ChatBotPanelDialogItem Constructor Called!\n";
+    // std::cout << "ChatBotPanelDialogItem Constructor Called!\n";
 
     // retrieve image from chatbot
     wxBitmap *bitmap = isFromUser == true ? nullptr : ((ChatBotPanelDialog*)parent)->GetChatLogicHandle()->GetImageFromChatbot(); 
@@ -233,5 +233,5 @@ ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel *parent, wxString text, b
 ChatBotPanelDialogItem::~ChatBotPanelDialogItem() 
 {
     /* Temporary */
-    std::cout << "ChatBotPanelDialogItem Destructor Called!\n"; 
+    // std::cout << "ChatBotPanelDialogItem Destructor Called!\n"; 
 }
